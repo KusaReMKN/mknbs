@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>MKNBS Test</title>
+	<script src="mknbs.js"></script>
+</head>
+
+<body>
+	<h1>MKMBS Test</h1>
+	<p>
+		音声データの読み込みが完了すると、デモプレイ可能なボタンが有効になります。
+	</p>
+	<img src="http://www.plantuml.com/plantuml/png/VOwxYeOm64JxxobE7_OTH5Qih8GjXO0MWXTOOpSF_pV_42iJ3fCJ9fVcAlc_tFiMyrfo3W3IptEa043yBbTPZrpMyq0lJM1oUWSv8zK-yB0GRJ-uZHWxdn7ydTkzBmYezdOR4nYe5WYCLz-V9GmyBDGA0nfbGhqme3f3Wp2WJkRbdMOvvdlVFW00">
+	<h2>BGM</h2>
+	<p>
+		BGM は同一 ID で管理される AudioBuffer を同時に複数再生できず、途中で停止できる。
+	</p>
+	<button onclick="mknbs.bgm.play('bgm');" disabled>Play</button>
+	<button onclick="mknbs.bgm.loop('bgm');" disabled>Loop</button>
+	<button onclick="mknbs.bgm.stop('bgm');" disabled>Stop</button>
+	<h2>SE</h2>
+	<p>
+		SE は同一 ID で管理される AudioBuffer であっても同時に再生でき、途中で停止できない。
+	</p>
+	<button onclick="mknbs.se.play('se');" disabled>Play</button>
+	<hr>
+	<h2>音源について</h2>
+	<p>
+		<a href="https://maoudamashii.jokersounds.com/" title="フリー音楽素材/魔王魂" target="_blank">フリー音楽素材/魔王魂</a>
+		BGM: <a href="https://maoudamashii.jokersounds.com/archives/bgm_maoudamashii_healing15.html">ヒーリング 15</a>
+		SE: <a href="https://maoudamashii.jokersounds.com/archives/se_maoudamashii_system49.html">システム 49</a>
+	</p>
+	<script>
+		(async () => {
+			mknbs.init();
+			await mknbs.bgm.load('bgm.mp3', 'bgm');
+			await mknbs.se.load('se.mp3', 'se');
+			const buttons = document.getElementsByTagName('button');
+			for (let i = 0; i < buttons.length; i++) {
+				buttons[i].disabled = false;
+			}
+		})();
+	</script>
+</body>
+
+</html>
